@@ -1,0 +1,236 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Rock vs Mine Detection</title>
+    <style>
+        body { font-family: Arial; background:#f7f7f7; margin:50px; }
+        .container { background:white; padding:30px; max-width:600px; margin:auto;
+                     border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+        input[type=text]{ width:100%; padding:10px; margin:10px 0; }
+        button{ padding:10px 20px; background:#007bff; color:white; border:none; cursor:pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Rock vs Mine Detection</h2>
+    <form action="/predict" method="post">
+        <label>Enter 60 comma-separated values:</label>
+        <input type="text" name="features" placeholder="0.0200,0.0371,0.0428,...">
+        <button type="submit">Predict</button>
+    </form>
+    {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+    {% endif %}
+</div>
+</body>
+</html>
+ -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock vs Mine Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a73e8, #00bcd4);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .icon-header {
+            font-size: 50px;
+            color: #ffeb3b;
+            margin-bottom: 15px;
+            animation: float 2s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        input[type=text] {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        button {
+            background: #ff9800;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ffc107;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .result i {
+            font-size: 50px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .rock i {
+            color: #795548;
+        }
+
+        .mine i {
+            color: #e53935;
+        }
+
+        .marine-icons {
+            margin-top: 20px;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .marine-icons i {
+            margin: 0 10px;
+            transition: transform 0.4s;
+        }
+
+        .marine-icons i:hover {
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-header"><i class="fas fa-water"></i></div>
+        <h2>Rock vs Mine Detection</h2>
+        <form action="/predict" method="post">
+            <label>Enter 60 comma-separated values:</label><br>
+            <input type="text" name="features" placeholder="0.0200,0.0371,0.0428,..." required>
+            <br>
+            <button type="submit"><i class="fas fa-microscope"></i> Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result 
+                {% if 'Rock' in prediction_text %}rock{% elif 'Mine' in prediction_text %}mine{% endif %}">
+                {{ prediction_text }}
+                {% if 'Rock' in prediction_text %}
+                    <i class="fas fa-gem"></i>
+                {% elif 'Mine' in prediction_text %}
+                    <i class="fas fa-bomb"></i>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="marine-icons">
+            <i class="fas fa-ship"></i>
+            <i class="fas fa-anchor"></i>
+            <i class="fas fa-fish"></i>
+            <i class="fas fa-water"></i>
+            <i class="fas fa-subway"></i>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submarine Sonar - Rock vs Mine Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://kit.fontawesome.com/a2e0e9a2e2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🌊 Submarine Sonar System</h1>
+        <p class="subtitle">AI-powered Rock vs Mine Detection</p>
+
+        <form action="/predict" method="post" id="predictionForm">
+            <textarea name="features" placeholder="Enter 60 comma-separated sonar values..." required></textarea>
+            <button type="submit">🔍 Detect Object</button>
+        </form>
+
+        <div id="result-box" class="hidden">
+            <h2>Detection Result:</h2>
+            <img id="prediction-image" src="" alt="">
+            <p id="prediction-text"></p>
+        </div>
+
+        <div class="marine-icons">
+            <i class="fas fa-submarine"></i>
+            <i class="fas fa-anchor"></i>
+            <i class="fas fa-fish"></i>
+            <i class="fas fa-water"></i>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("predictionForm").onsubmit = async function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: new FormData(form)
+            });
+            const resultText = await response.text();
+
+            const resultBox = document.getElementById("result-box");
+            const predictionText = document.getElementById("prediction-text");
+            const predictionImage = document.getElementById("prediction-image");
+
+            predictionText.textContent = resultText;
+
+            if (resultText.toLowerCase().includes("rock")) {
+                predictionImage.src = "{{ url_for('static', filename='rock.png') }}";
+            } else if (resultText.toLowerCase().includes("mine")) {
+                predictionImage.src = "{{ url_for('static', filename='mine.png') }}";
+            }
+
+            resultBox.classList.remove("hidden");
+        };
+    </script>
+</body>
+</html>

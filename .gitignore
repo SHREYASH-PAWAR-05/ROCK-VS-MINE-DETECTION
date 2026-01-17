@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+
+# Virtual environment
+ml_env/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Data files (if you want to ignore large CSVs, optional)
+# New folder/Copy of sonar data.csv
+
+# Model files (if you don't want to push model)
+# rock_mine_model.pkl
